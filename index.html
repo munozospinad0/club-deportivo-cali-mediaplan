@@ -251,17 +251,30 @@ h3{font-size:16px;font-weight:700;margin-bottom:6px}
   <div class="p-ring"></div><div class="p-ring"></div><div class="p-glow"></div>
   <div class="si portada">
     <!-- Deportivo Cali Shield -->
-    <svg width="80" height="90" viewBox="0 0 90 100" fill="none" style="margin-bottom:20px;filter:drop-shadow(0 0 24px rgba(34,139,34,.3))">
-      <defs><linearGradient id="sh1" x1="0" y1="0" x2="0" y2="100%"><stop stop-color="#2d8c3c"/><stop offset="1" stop-color="#1a6b28"/></linearGradient></defs>
-      <path d="M45 3 L84 18 Q87 19 87 22 L87 52 Q87 75 45 97 Q3 75 3 52 L3 22 Q3 19 6 18 Z" fill="url(#sh1)" stroke="#fff" stroke-width="2.5"/>
-      <clipPath id="shC"><path d="M45 3 L84 18 Q87 19 87 22 L87 52 Q87 75 45 97 Q3 75 3 52 L3 22 Q3 19 6 18 Z"/></clipPath>
-      <polygon points="50,3 87,3 87,70 30,97" fill="rgba(255,255,255,.92)" clip-path="url(#shC)"/>
-      <path d="M45 10 L78 22 Q80 23 80 25 L80 50 Q80 70 45 90 Q10 70 10 50 L10 25 Q10 23 12 22 Z" fill="none" stroke="#fff" stroke-width="1.5" opacity=".5"/>
-      <text x="45" y="38" text-anchor="middle" fill="#fff" font-family="Arial Black,sans-serif" font-size="10" font-weight="900" letter-spacing="1">DEPORTIVO</text>
-      <text x="32" y="68" text-anchor="middle" fill="#fff" font-family="Arial Black,sans-serif" font-size="22" font-weight="900">C</text>
-      <text x="47" y="68" text-anchor="middle" fill="#1a6b28" font-family="Arial Black,sans-serif" font-size="22" font-weight="900">A</text>
-      <text x="58" y="68" text-anchor="middle" fill="#1a6b28" font-family="Arial Black,sans-serif" font-size="22" font-weight="900">L</text>
-      <text x="68" y="68" text-anchor="middle" fill="#1a6b28" font-family="Arial Black,sans-serif" font-size="22" font-weight="900">I</text>
+    <svg width="88" height="98" viewBox="0 0 90 100" fill="none" style="margin-bottom:22px;filter:drop-shadow(0 0 28px rgba(34,139,34,.35)) drop-shadow(0 4px 12px rgba(0,0,0,.4))">
+      <defs>
+        <linearGradient id="sh1" x1="0" y1="0" x2="0" y2="100%"><stop stop-color="#34a145"/><stop offset="1" stop-color="#1e7a2e"/></linearGradient>
+        <linearGradient id="sh2" x1="0" y1="0" x2="100%" y2="100%"><stop stop-color="#fff"/><stop offset="1" stop-color="#e8e8e8"/></linearGradient>
+        <filter id="glow"><feGaussianBlur stdDeviation="1.5" result="blur"/><feComposite in="SourceGraphic" in2="blur"/></filter>
+      </defs>
+      <!-- Outer shield -->
+      <path d="M45 2 L85 17 Q88 18 88 21 L88 53 Q88 76 45 98 Q2 76 2 53 L2 21 Q2 18 5 17 Z" fill="#0d3d16" stroke="rgba(255,255,255,.15)" stroke-width="1"/>
+      <!-- Inner shield green -->
+      <path d="M45 7 L81 20 Q83 21 83 23 L83 51 Q83 72 45 93 Q7 72 7 51 L7 23 Q7 21 9 20 Z" fill="url(#sh1)" stroke="#fff" stroke-width="2"/>
+      <!-- White diagonal -->
+      <clipPath id="shC"><path d="M45 7 L81 20 Q83 21 83 23 L83 51 Q83 72 45 93 Q7 72 7 51 L7 23 Q7 21 9 20 Z"/></clipPath>
+      <polygon points="52,7 83,7 83,65 28,93" fill="url(#sh2)" clip-path="url(#shC)"/>
+      <!-- Inner border -->
+      <path d="M45 14 L75 25 Q77 26 77 28 L77 48 Q77 66 45 85 Q13 66 13 48 L13 28 Q13 26 15 25 Z" fill="none" stroke="#fff" stroke-width="1.2" opacity=".4"/>
+      <!-- DEPORTIVO text with outline -->
+      <text x="45" y="37" text-anchor="middle" fill="#fff" font-family="Arial Black,Impact,sans-serif" font-size="10.5" font-weight="900" letter-spacing=".8" filter="url(#glow)">DEPORTIVO</text>
+      <!-- Divider line -->
+      <line x1="20" y1="42" x2="70" y2="42" stroke="rgba(255,255,255,.25)" stroke-width=".8"/>
+      <!-- CALI text — C on white, ALI on green -->
+      <text x="30" y="70" text-anchor="middle" fill="#fff" font-family="Arial Black,Impact,sans-serif" font-size="24" font-weight="900" filter="url(#glow)">C</text>
+      <text x="46" y="70" text-anchor="middle" fill="#1e7a2e" font-family="Arial Black,Impact,sans-serif" font-size="24" font-weight="900">A</text>
+      <text x="57" y="70" text-anchor="middle" fill="#1e7a2e" font-family="Arial Black,Impact,sans-serif" font-size="24" font-weight="900">L</text>
+      <text x="67" y="70" text-anchor="middle" fill="#1e7a2e" font-family="Arial Black,Impact,sans-serif" font-size="24" font-weight="900">I</text>
     </svg>
 
     <span class="tag tg-t" style="margin-bottom:10px;">Academia de F&uacute;tbol Infantil</span>
@@ -281,7 +294,7 @@ h3{font-size:16px;font-weight:700;margin-bottom:6px}
           <path d="M13 10L13 30M13 10Q26 10 26 20Q26 30 13 30" stroke="url(#lg)" stroke-width="2.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
           <path d="M17 30L17 15L23 24L29 15L29 30" stroke="url(#lg)" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round" opacity=".55"/>
         </svg>
-        <span style="font-size:9.5px;">Daniel Mu&ntilde;oz &middot; Digital Strategy</span>
+        <span style="font-size:9.5px;">Daniel Mu&ntilde;oz &middot; Digital Strategy &amp; Automation</span>
       </div>
     </div>
     <span class="dl">A B R I L &ensp; 2 0 2 6</span>
@@ -576,7 +589,7 @@ h3{font-size:16px;font-weight:700;margin-bottom:6px}
         <path d="M17 30L17 15L23 24L29 15L29 30" stroke="url(#lg2)" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round" opacity=".55"/>
       </svg>
       <h3 class="gt" style="font-size:20px;">Daniel Mu&ntilde;oz</h3>
-      <p style="font-size:13px;color:var(--t2);margin-top:4px;">Digital Strategy &middot; Media Planning &middot; Performance Marketing</p>
+      <p style="font-size:13px;color:var(--t2);margin-top:4px;">Digital Strategy &middot; Media Planning &middot; Automation</p>
       <p style="font-size:11px;color:var(--t3);margin-top:12px;">Abril 2026</p>
     </div>
   </div>
