@@ -1,0 +1,1131 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Media Plan — Club Deportivo Cali | Daniel Mu&ntilde;oz</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+/* ══════════════════════════════════════════════
+   RESET & VARIABLES
+   ══════════════════════════════════════════════ */
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+html, body { height: 100%; overflow: hidden; font-family: 'Inter', sans-serif; background: var(--navy); color: var(--text); }
+
+:root {
+  --navy: #0a0f2e;
+  --navy-light: #111640;
+  --navy-mid: #161d50;
+  --primary: #22c55e;
+  --primary-light: #4ade80;
+  --primary-dim: rgba(34,197,94,0.15);
+  --primary-glow: rgba(34,197,94,0.4);
+  --secondary: #f59e0b;
+  --secondary-light: #fbbf24;
+  --secondary-dim: rgba(245,158,11,0.12);
+  --secondary-glow: rgba(245,158,11,0.35);
+  --reach: #3b82f6;
+  --reach-dim: rgba(59,130,246,0.12);
+  --reach-glow: rgba(59,130,246,0.3);
+  --leads: #22c55e;
+  --leads-dim: rgba(34,197,94,0.12);
+  --remarket: #f59e0b;
+  --remarket-dim: rgba(245,158,11,0.12);
+  --meta: #0668E1;
+  --meta-dim: rgba(6,104,225,0.15);
+  --whatsapp: #25D366;
+  --text: #f1f5f9;
+  --text-secondary: #cbd5e1;
+  --text-muted: #64748b;
+  --card-bg: rgba(255,255,255,0.03);
+  --card-border: rgba(34,197,94,0.15);
+  --glass: rgba(255,255,255,0.04);
+  --glass-border: rgba(255,255,255,0.08);
+}
+
+/* ══════════════════════════════════════════════
+   MESH GRADIENT BACKGROUND
+   ══════════════════════════════════════════════ */
+.mesh-bg {
+  position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none;
+  background:
+    radial-gradient(ellipse 80% 60% at 10% 20%, rgba(34,197,94,0.08) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 80% at 90% 80%, rgba(245,158,11,0.06) 0%, transparent 60%),
+    radial-gradient(ellipse 70% 50% at 50% 50%, rgba(59,130,246,0.04) 0%, transparent 60%),
+    var(--navy);
+  animation: meshShift 20s ease-in-out infinite alternate;
+}
+@keyframes meshShift {
+  0% { background-position: 0% 0%, 100% 100%, 50% 50%; }
+  33% { background-position: 20% 40%, 80% 60%, 40% 30%; }
+  66% { background-position: 40% 10%, 60% 90%, 70% 60%; }
+  100% { background-position: 10% 30%, 90% 70%, 30% 40%; }
+}
+
+/* Floating orbs */
+.orb {
+  position: fixed; border-radius: 50%; filter: blur(80px); z-index: 0; pointer-events: none;
+  animation: orbFloat 25s ease-in-out infinite alternate;
+}
+.orb-1 { width: 400px; height: 400px; top: -100px; left: -100px; background: rgba(34,197,94,0.07); }
+.orb-2 { width: 350px; height: 350px; bottom: -80px; right: -80px; background: rgba(245,158,11,0.06); animation-delay: -8s; animation-duration: 30s; }
+.orb-3 { width: 300px; height: 300px; top: 40%; left: 60%; background: rgba(59,130,246,0.05); animation-delay: -15s; animation-duration: 22s; }
+@keyframes orbFloat {
+  0% { transform: translate(0, 0) scale(1); }
+  25% { transform: translate(40px, -30px) scale(1.1); }
+  50% { transform: translate(-20px, 50px) scale(0.95); }
+  75% { transform: translate(30px, 20px) scale(1.05); }
+  100% { transform: translate(-10px, -40px) scale(1); }
+}
+
+/* ══════════════════════════════════════════════
+   PROGRESS BAR
+   ══════════════════════════════════════════════ */
+#progress-bar {
+  position: fixed; top: 0; left: 0; height: 3px; z-index: 1000;
+  background: linear-gradient(90deg, var(--primary), var(--secondary), var(--primary-light));
+  background-size: 200% 100%;
+  animation: progressGlow 3s ease-in-out infinite;
+  transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 0 15px var(--primary-glow), 0 0 30px rgba(34,197,94,0.15);
+}
+@keyframes progressGlow {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+/* ══════════════════════════════════════════════
+   SLIDE COUNTER
+   ══════════════════════════════════════════════ */
+#slide-counter {
+  position: fixed; bottom: 28px; right: 36px; z-index: 1000;
+  font-size: 12px; font-weight: 500; color: var(--text-muted);
+  letter-spacing: 2px; font-variant-numeric: tabular-nums;
+}
+
+/* ══════════════════════════════════════════════
+   NAV DOTS
+   ══════════════════════════════════════════════ */
+#slide-dots {
+  position: fixed; bottom: 26px; left: 50%; transform: translateX(-50%);
+  display: flex; gap: 8px; z-index: 1000;
+}
+.dot {
+  width: 7px; height: 7px; border-radius: 50%; background: var(--text-muted);
+  cursor: pointer; transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  opacity: 0.4;
+}
+.dot.active {
+  background: var(--primary); transform: scale(1.6);
+  box-shadow: 0 0 12px var(--primary-glow); opacity: 1;
+}
+.dot:hover { opacity: 0.8; transform: scale(1.3); }
+
+/* ══════════════════════════════════════════════
+   NAVIGATION BUTTONS
+   ══════════════════════════════════════════════ */
+.nav-btn {
+  position: fixed; top: 50%; z-index: 1000; transform: translateY(-50%);
+  width: 48px; height: 48px; border-radius: 50%;
+  border: 1px solid var(--glass-border);
+  background: rgba(10,15,46,0.7); backdrop-filter: blur(16px);
+  color: var(--text-muted); font-size: 18px; cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); opacity: 0.5;
+}
+.nav-btn:hover {
+  opacity: 1; color: #fff; background: rgba(34,197,94,0.25);
+  border-color: var(--primary); transform: translateY(-50%) scale(1.1);
+  box-shadow: 0 0 25px rgba(34,197,94,0.2);
+}
+#prev-btn { left: 18px; }
+#next-btn { right: 18px; }
+
+/* Fullscreen button */
+#fs-btn {
+  position: fixed; top: 18px; right: 18px; z-index: 1000;
+  width: 36px; height: 36px; border-radius: 8px;
+  border: 1px solid var(--glass-border); background: rgba(10,15,46,0.6);
+  backdrop-filter: blur(12px); color: var(--text-muted); font-size: 14px;
+  cursor: pointer; display: flex; align-items: center; justify-content: center;
+  transition: all 0.3s; opacity: 0.4;
+}
+#fs-btn:hover { opacity: 1; color: var(--primary); border-color: var(--primary); }
+
+/* Keyboard hint */
+#kb-hint {
+  position: fixed; bottom: 60px; left: 50%; transform: translateX(-50%);
+  z-index: 1000; font-size: 11px; color: var(--text-muted);
+  display: flex; align-items: center; gap: 6px;
+  transition: opacity 1s ease; opacity: 0.6;
+}
+#kb-hint kbd {
+  display: inline-flex; align-items: center; justify-content: center;
+  min-width: 22px; height: 22px; padding: 0 6px; border-radius: 4px;
+  background: rgba(255,255,255,0.06); border: 1px solid var(--glass-border);
+  font-family: inherit; font-size: 10px; font-weight: 600;
+}
+
+/* ══════════════════════════════════════════════
+   SLIDES CONTAINER
+   ══════════════════════════════════════════════ */
+#slides-wrapper {
+  display: flex; height: 100vh; width: 100%;
+  transition: transform 0.65s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative; z-index: 1;
+}
+.slide {
+  min-width: 100vw; height: 100vh;
+  display: flex; align-items: center; justify-content: center;
+  padding: 60px 80px; position: relative; overflow-y: auto; overflow-x: hidden;
+}
+.slide-inner {
+  max-width: 1100px; width: 100%;
+}
+
+/* Stagger animation for slide children */
+.slide .slide-inner > * {
+  opacity: 0; transform: translateY(28px);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+.slide.active .slide-inner > * { opacity: 1; transform: translateY(0); }
+.slide.active .slide-inner > *:nth-child(1) { transition-delay: 0.05s; }
+.slide.active .slide-inner > *:nth-child(2) { transition-delay: 0.12s; }
+.slide.active .slide-inner > *:nth-child(3) { transition-delay: 0.19s; }
+.slide.active .slide-inner > *:nth-child(4) { transition-delay: 0.26s; }
+.slide.active .slide-inner > *:nth-child(5) { transition-delay: 0.33s; }
+.slide.active .slide-inner > *:nth-child(6) { transition-delay: 0.40s; }
+.slide.active .slide-inner > *:nth-child(7) { transition-delay: 0.47s; }
+
+/* ══════════════════════════════════════════════
+   TYPOGRAPHY
+   ══════════════════════════════════════════════ */
+h1 { font-size: 56px; font-weight: 900; line-height: 1.02; margin-bottom: 18px; letter-spacing: -2px; }
+h2 { font-size: 40px; font-weight: 800; line-height: 1.1; margin-bottom: 14px; letter-spacing: -1px; }
+h2::after {
+  content: ''; display: block; width: 60px; height: 3px; margin-top: 12px;
+  background: linear-gradient(90deg, var(--primary), var(--secondary));
+  border-radius: 2px;
+}
+h3 { font-size: 18px; font-weight: 700; margin-bottom: 8px; color: var(--text); }
+.subtitle { font-size: 16px; color: var(--text-secondary); line-height: 1.7; margin-bottom: 28px; max-width: 800px; }
+.small-text { font-size: 12px; color: var(--text-muted); line-height: 1.6; }
+
+.gradient-text {
+  background: linear-gradient(135deg, var(--primary-light) 0%, var(--secondary-light) 100%);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+}
+
+/* ══════════════════════════════════════════════
+   TAGS / BADGES
+   ══════════════════════════════════════════════ */
+.slide-tag {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 5px 16px; border-radius: 20px;
+  font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 2.5px;
+  margin-bottom: 16px;
+}
+.tag-green { background: var(--primary-dim); color: var(--primary-light); border: 1px solid rgba(34,197,94,0.25); }
+.tag-gold { background: var(--secondary-dim); color: var(--secondary-light); border: 1px solid rgba(245,158,11,0.2); }
+.tag-blue { background: var(--reach-dim); color: var(--reach); border: 1px solid rgba(59,130,246,0.2); }
+.tag-meta { background: var(--meta-dim); color: #4da6ff; border: 1px solid rgba(6,104,225,0.25); }
+
+.pill {
+  display: inline-flex; align-items: center; gap: 5px;
+  padding: 7px 18px; border-radius: 24px; font-size: 12px; font-weight: 600;
+  background: var(--glass); border: 1px solid var(--glass-border);
+  color: var(--text-secondary); margin: 4px;
+}
+.pill-green { border-color: rgba(34,197,94,0.3); color: var(--primary-light); }
+.pill-gold { border-color: rgba(245,158,11,0.3); color: var(--secondary-light); }
+.pill-meta { border-color: rgba(6,104,225,0.3); color: #4da6ff; }
+
+/* ══════════════════════════════════════════════
+   GLASSMORPHISM CARDS
+   ══════════════════════════════════════════════ */
+.card {
+  background: linear-gradient(135deg, rgba(255,255,255,0.04) 0%, rgba(255,255,255,0.01) 100%) padding-box,
+              linear-gradient(135deg, rgba(255,255,255,0.1), rgba(255,255,255,0.03)) border-box;
+  border: 1px solid transparent; border-radius: 16px;
+  padding: 24px; backdrop-filter: blur(20px);
+  transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.card:hover {
+  transform: translateY(-3px) scale(1.01);
+  box-shadow: 0 12px 40px rgba(0,0,0,0.25), 0 0 30px rgba(34,197,94,0.06);
+}
+.card-green {
+  background: linear-gradient(135deg, rgba(34,197,94,0.06), rgba(34,197,94,0.01)) padding-box,
+              linear-gradient(135deg, rgba(34,197,94,0.3), rgba(34,197,94,0.08)) border-box;
+}
+.card-green:hover { box-shadow: 0 12px 40px rgba(0,0,0,0.25), 0 0 30px rgba(34,197,94,0.12); }
+.card-gold {
+  background: linear-gradient(135deg, rgba(245,158,11,0.06), rgba(245,158,11,0.01)) padding-box,
+              linear-gradient(135deg, rgba(245,158,11,0.3), rgba(245,158,11,0.08)) border-box;
+}
+.card-blue {
+  background: linear-gradient(135deg, rgba(59,130,246,0.06), rgba(59,130,246,0.01)) padding-box,
+              linear-gradient(135deg, rgba(59,130,246,0.3), rgba(59,130,246,0.08)) border-box;
+}
+.card-highlight {
+  background: linear-gradient(135deg, rgba(34,197,94,0.08), rgba(34,197,94,0.02)) padding-box,
+              linear-gradient(135deg, rgba(34,197,94,0.45), rgba(245,158,11,0.2)) border-box;
+  box-shadow: 0 0 30px rgba(34,197,94,0.08);
+}
+
+.card-label {
+  font-size: 10px; font-weight: 700; text-transform: uppercase;
+  letter-spacing: 2px; color: var(--text-muted); margin-bottom: 8px;
+}
+.card-icon {
+  width: 40px; height: 40px; border-radius: 12px; display: flex;
+  align-items: center; justify-content: center; font-size: 18px;
+  margin-bottom: 12px; font-weight: 800;
+}
+.icon-green { background: var(--primary-dim); color: var(--primary-light); }
+.icon-gold { background: var(--secondary-dim); color: var(--secondary-light); }
+.icon-blue { background: var(--reach-dim); color: var(--reach); }
+.icon-meta { background: var(--meta-dim); color: #4da6ff; }
+
+/* ══════════════════════════════════════════════
+   GRID LAYOUTS
+   ══════════════════════════════════════════════ */
+.grid { display: grid; gap: 16px; }
+.grid-2 { grid-template-columns: repeat(2, 1fr); }
+.grid-3 { grid-template-columns: repeat(3, 1fr); }
+.grid-4 { grid-template-columns: repeat(4, 1fr); }
+.two-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+
+/* ══════════════════════════════════════════════
+   STAT NUMBERS
+   ══════════════════════════════════════════════ */
+.stat-num {
+  font-size: 32px; font-weight: 900; letter-spacing: -1px;
+  margin: 6px 0; line-height: 1;
+}
+.stat-green { color: var(--primary-light); }
+.stat-gold { color: var(--secondary-light); }
+.stat-blue { color: var(--reach); }
+
+/* ══════════════════════════════════════════════
+   TABLES IN CARDS
+   ══════════════════════════════════════════════ */
+.info-table { width: 100%; border-collapse: collapse; margin-top: 10px; }
+.info-table td { padding: 7px 0; font-size: 13px; border-bottom: 1px solid rgba(255,255,255,0.05); vertical-align: top; }
+.info-table td:first-child { color: var(--text-muted); font-weight: 600; width: 35%; padding-right: 12px; white-space: nowrap; }
+.info-table td:last-child { color: var(--text-secondary); }
+.info-table tr:last-child td { border-bottom: none; }
+
+/* ══════════════════════════════════════════════
+   BUDGET BAR
+   ══════════════════════════════════════════════ */
+.budget-bar {
+  display: flex; height: 44px; border-radius: 12px; overflow: hidden;
+  margin: 24px 0 28px; border: 1px solid rgba(255,255,255,0.06);
+  background: rgba(0,0,0,0.2);
+}
+.budget-seg {
+  display: flex; align-items: center; justify-content: center;
+  font-size: 11px; font-weight: 700; letter-spacing: 0.5px;
+  transition: width 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative; overflow: hidden;
+}
+.budget-seg::after {
+  content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+  animation: shimmer 2.5s ease-in-out infinite;
+}
+@keyframes shimmer { 0% { left: -100%; } 100% { left: 100%; } }
+.seg-reach { background: rgba(59,130,246,0.35); color: var(--reach); }
+.seg-leads { background: rgba(34,197,94,0.3); color: var(--primary-light); }
+.seg-remarket { background: rgba(245,158,11,0.3); color: var(--secondary-light); }
+
+/* Animate from 0 width */
+.budget-bar.animate .seg-reach { width: 6.25% !important; }
+.budget-bar.animate .seg-leads { width: 75% !important; }
+.budget-bar.animate .seg-remarket { width: 18.75% !important; }
+
+/* ══════════════════════════════════════════════
+   CHECKLIST
+   ══════════════════════════════════════════════ */
+.checklist { list-style: none; padding: 0; }
+.checklist li {
+  padding: 8px 0; font-size: 13px; color: var(--text-secondary);
+  display: flex; align-items: flex-start; gap: 10px;
+  border-bottom: 1px solid rgba(255,255,255,0.04);
+}
+.checklist li:last-child { border-bottom: none; }
+.checklist li::before {
+  content: ''; width: 6px; height: 6px; border-radius: 50%;
+  background: var(--primary); margin-top: 6px; flex-shrink: 0;
+}
+
+/* ══════════════════════════════════════════════
+   PLACEHOLDER BOX
+   ══════════════════════════════════════════════ */
+.placeholder-box {
+  border: 2px dashed rgba(245,158,11,0.3); border-radius: 10px;
+  padding: 14px 18px; margin: 10px 0;
+  background: rgba(245,158,11,0.04);
+  color: var(--secondary-light); font-size: 13px; font-weight: 500;
+}
+
+/* ══════════════════════════════════════════════
+   PORTADA SPECIAL
+   ══════════════════════════════════════════════ */
+.slide-portada {
+  text-align: center;
+  background:
+    radial-gradient(ellipse 50% 60% at 50% 40%, rgba(34,197,94,0.1) 0%, transparent 70%),
+    radial-gradient(ellipse 40% 50% at 30% 70%, rgba(245,158,11,0.06) 0%, transparent 60%);
+}
+.portada-ring {
+  position: absolute; top: 50%; left: 50%; width: 500px; height: 500px;
+  transform: translate(-50%, -50%);
+  border: 1px solid rgba(34,197,94,0.08); border-radius: 50%;
+  animation: ringPulse 8s ease-in-out infinite;
+  pointer-events: none;
+}
+.portada-ring:nth-child(2) { width: 650px; height: 650px; animation-delay: -2s; border-color: rgba(245,158,11,0.05); }
+.portada-ring:nth-child(3) { width: 800px; height: 800px; animation-delay: -4s; border-color: rgba(59,130,246,0.04); }
+@keyframes ringPulse {
+  0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 0.5; }
+  50% { transform: translate(-50%, -50%) scale(1.06); opacity: 1; }
+}
+
+.year-badge {
+  display: inline-block; margin-top: 20px;
+  font-size: 11px; font-weight: 600; letter-spacing: 4px;
+  color: var(--text-muted); text-transform: uppercase;
+}
+
+/* DM Logo */
+.dm-logo { margin-bottom: 20px; }
+.dm-brand {
+  font-size: 12px; font-weight: 600; color: var(--text-muted);
+  letter-spacing: 3px; text-transform: uppercase; margin-top: 8px;
+}
+
+/* Footer branding on all slides */
+.slide-footer {
+  position: absolute; bottom: 24px; left: 50%; transform: translateX(-50%);
+  display: flex; align-items: center; gap: 10px;
+  font-size: 10px; color: var(--text-muted); letter-spacing: 1px; font-weight: 500;
+  opacity: 0.5;
+}
+.slide-footer svg { width: 18px; height: 18px; }
+
+/* ══════════════════════════════════════════════
+   CAMPAIGN BADGE
+   ══════════════════════════════════════════════ */
+.camp-badge {
+  display: inline-flex; align-items: center; padding: 4px 12px;
+  border-radius: 6px; font-size: 9px; font-weight: 800;
+  text-transform: uppercase; letter-spacing: 2px; margin-bottom: 14px;
+}
+.camp-1 { background: var(--reach-dim); color: var(--reach); }
+.camp-2 { background: var(--primary-dim); color: var(--primary-light); }
+.camp-3 { background: var(--secondary-dim); color: var(--secondary-light); }
+
+/* ══════════════════════════════════════════════
+   WEEK CARDS (Timeline)
+   ══════════════════════════════════════════════ */
+.week-card { position: relative; padding-top: 6px; }
+.week-card::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+  border-radius: 2px;
+}
+.week-1::before { background: linear-gradient(90deg, var(--reach), var(--primary)); }
+.week-2::before { background: linear-gradient(90deg, var(--primary), var(--secondary)); }
+.week-3::before { background: linear-gradient(90deg, var(--secondary), var(--primary)); }
+.week-4::before { background: linear-gradient(90deg, var(--primary-light), var(--secondary-light)); }
+
+.week-num {
+  font-size: 10px; font-weight: 800; text-transform: uppercase;
+  letter-spacing: 2px; color: var(--text-muted); margin-bottom: 6px; margin-top: 10px;
+}
+
+/* ══════════════════════════════════════════════
+   KPI COUNTER CARDS
+   ══════════════════════════════════════════════ */
+.kpi-num {
+  font-size: 28px; font-weight: 900; letter-spacing: -0.5px;
+  margin: 8px 0 4px; line-height: 1;
+}
+.kpi-label { font-size: 11px; color: var(--text-muted); font-weight: 600; text-transform: uppercase; letter-spacing: 1px; }
+.kpi-range { font-size: 12px; color: var(--text-secondary); margin-top: 4px; }
+
+/* ══════════════════════════════════════════════
+   NEXT STEPS NUMBERED
+   ══════════════════════════════════════════════ */
+.steps-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
+.step-card { display: flex; gap: 14px; align-items: flex-start; }
+.step-num {
+  width: 32px; height: 32px; border-radius: 10px; flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 13px; font-weight: 800;
+  background: var(--primary-dim); color: var(--primary-light);
+  border: 1px solid rgba(34,197,94,0.2);
+}
+.step-text { font-size: 13px; color: var(--text-secondary); line-height: 1.5; }
+.step-text strong { color: var(--text); font-weight: 600; }
+
+/* ══════════════════════════════════════════════
+   CONTACT CARD
+   ══════════════════════════════════════════════ */
+.contact-card {
+  text-align: center; margin-top: 24px;
+  padding: 28px; border-radius: 16px;
+  background: linear-gradient(135deg, rgba(34,197,94,0.06), rgba(245,158,11,0.03)) padding-box,
+              linear-gradient(135deg, rgba(34,197,94,0.25), rgba(245,158,11,0.15)) border-box;
+  border: 1px solid transparent;
+}
+
+/* ══════════════════════════════════════════════
+   RESPONSIVE
+   ══════════════════════════════════════════════ */
+@media (max-width: 900px) {
+  .slide { padding: 50px 30px; }
+  h1 { font-size: 36px; letter-spacing: -1px; }
+  h2 { font-size: 28px; }
+  .grid-2, .grid-3, .grid-4, .two-cols, .steps-grid { grid-template-columns: 1fr; }
+}
+@media (max-width: 600px) {
+  .slide { padding: 40px 20px; }
+  h1 { font-size: 28px; }
+  h2 { font-size: 24px; }
+  .nav-btn { display: none; }
+  .budget-bar { height: 32px; }
+  .stat-num { font-size: 24px; }
+  .kpi-num { font-size: 22px; }
+  .portada-ring { display: none; }
+}
+</style>
+</head>
+<body>
+
+<!-- Mesh Background -->
+<div class="mesh-bg"></div>
+<div class="orb orb-1"></div>
+<div class="orb orb-2"></div>
+<div class="orb orb-3"></div>
+
+<!-- Progress Bar -->
+<div id="progress-bar" style="width: 11.1%"></div>
+
+<!-- Navigation -->
+<button class="nav-btn" id="prev-btn">&#8592;</button>
+<button class="nav-btn" id="next-btn">&#8594;</button>
+
+<!-- Fullscreen -->
+<button id="fs-btn" onclick="toggleFS()" title="Fullscreen">&#x26F6;</button>
+
+<!-- Counter -->
+<div id="slide-counter">01 / 09</div>
+
+<!-- Dots -->
+<div id="slide-dots"></div>
+
+<!-- Keyboard Hint -->
+<div id="kb-hint"><kbd>&#8592;</kbd> <kbd>&#8594;</kbd> navegar &nbsp;&middot;&nbsp; <kbd>F</kbd> fullscreen</div>
+
+<!-- ═══════════════════════════════════════════
+     SLIDES
+     ═══════════════════════════════════════════ -->
+<div id="slides-wrapper">
+
+<!-- ▸ SLIDE 0 — PORTADA -->
+<div class="slide slide-portada active">
+  <div class="portada-ring"></div>
+  <div class="portada-ring"></div>
+  <div class="portada-ring"></div>
+  <div class="slide-inner" style="text-align:center;">
+    <!-- DM Logo -->
+    <div class="dm-logo">
+      <svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="dmGrad" x1="0" y1="0" x2="64" y2="64">
+            <stop offset="0%" stop-color="#4ade80"/>
+            <stop offset="100%" stop-color="#f59e0b"/>
+          </linearGradient>
+        </defs>
+        <rect x="2" y="2" width="60" height="60" rx="16" stroke="url(#dmGrad)" stroke-width="2.5" fill="none"/>
+        <text x="32" y="42" text-anchor="middle" fill="url(#dmGrad)" font-family="Inter, sans-serif" font-size="26" font-weight="900" letter-spacing="-1">DM</text>
+      </svg>
+      <div class="dm-brand">Daniel Mu&ntilde;oz &nbsp;|&nbsp; Digital Strategy</div>
+    </div>
+
+    <span class="slide-tag tag-meta">&#9679; Meta Ads</span>
+    <h1><span class="gradient-text">Club Deportivo Cali</span><br>Media Plan</h1>
+    <p class="subtitle" style="margin: 0 auto 24px; max-width: 650px;">Estrategia de captaci&oacute;n de leads para academia de f&uacute;tbol infantil (3&ndash;13 a&ntilde;os) en Estados Unidos</p>
+    <div>
+      <span class="pill pill-meta">&#9679; Meta Ads</span>
+      <span class="pill pill-green">$400 USD</span>
+      <span class="pill pill-gold">30 d&iacute;as</span>
+    </div>
+    <div class="year-badge">A B R I L &nbsp; 2 0 2 6</div>
+  </div>
+</div>
+
+<!-- ▸ SLIDE 1 — RESUMEN EJECUTIVO -->
+<div class="slide">
+  <div class="slide-inner">
+    <span class="slide-tag tag-green">Resumen Ejecutivo</span>
+    <h2>Panorama General</h2>
+    <p class="subtitle">Campa&ntilde;a de un mes en Meta Ads enfocada en generar leads de padres interesados en la academia de f&uacute;tbol para ni&ntilde;os.</p>
+
+    <div class="grid grid-4">
+      <div class="card">
+        <div class="card-icon icon-green">&#9917;</div>
+        <div class="card-label">Objetivo</div>
+        <h3>Captar Leads</h3>
+        <p class="small-text">Padres interesados en inscribir a sus hijos (3&ndash;13 a&ntilde;os) en la academia</p>
+      </div>
+      <div class="card">
+        <div class="card-icon icon-gold">$</div>
+        <div class="card-label">Presupuesto</div>
+        <div class="stat-num stat-green">$400</div>
+        <p class="small-text">USD por mes</p>
+      </div>
+      <div class="card">
+        <div class="card-icon icon-meta">f</div>
+        <div class="card-label">Plataforma</div>
+        <h3>Meta Ads</h3>
+        <p class="small-text">Facebook + Instagram (Feed, Stories, Reels)</p>
+      </div>
+      <div class="card">
+        <div class="card-icon icon-gold">&#9201;</div>
+        <div class="card-label">Duraci&oacute;n</div>
+        <h3>30 d&iacute;as</h3>
+        <p class="small-text">4 semanas de campa&ntilde;a activa</p>
+      </div>
+    </div>
+
+    <div class="grid grid-2" style="margin-top:16px;">
+      <div class="card card-highlight">
+        <div class="card-label">Sin Website</div>
+        <h3>Lead Forms + WhatsApp</h3>
+        <p class="small-text">Todo el tr&aacute;fico se dirige a formularios instant&aacute;neos nativos de Meta y Click-to-WhatsApp. No se requiere landing page.</p>
+      </div>
+      <div class="card">
+        <div class="card-label">Modelo de Captaci&oacute;n</div>
+        <h3>Formulario + Contacto Directo</h3>
+        <p class="small-text">Los padres llenan un formulario corto dentro de la app (sin salir) o inician conversaci&oacute;n por WhatsApp directamente.</p>
+      </div>
+    </div>
+  </div>
+  <div class="slide-footer">
+    <svg width="18" height="18" viewBox="0 0 64 64" fill="none"><rect x="2" y="2" width="60" height="60" rx="16" stroke="#64748b" stroke-width="2" fill="none"/><text x="32" y="42" text-anchor="middle" fill="#64748b" font-family="Inter" font-size="26" font-weight="900">DM</text></svg>
+    Daniel Mu&ntilde;oz &nbsp;&middot;&nbsp; Digital Strategy
+  </div>
+</div>
+
+<!-- ▸ SLIDE 2 — AUDIENCIA & TARGETING -->
+<div class="slide">
+  <div class="slide-inner">
+    <span class="slide-tag tag-gold">Audiencia</span>
+    <h2>A qui&eacute;n le hablamos</h2>
+    <p class="subtitle">Padres de familia con hijos entre 3 y 13 a&ntilde;os que vivan cerca de la academia, con capacidad econ&oacute;mica para actividades extracurriculares.</p>
+
+    <div class="two-cols">
+      <div>
+        <div class="card card-green" style="margin-bottom:14px;">
+          <div class="card-label">Demograf&iacute;a</div>
+          <table class="info-table">
+            <tr><td>Edad padres</td><td>25 &ndash; 50 a&ntilde;os</td></tr>
+            <tr><td>G&eacute;nero</td><td>Todos</td></tr>
+            <tr><td>Hijos</td><td>3 &ndash; 13 a&ntilde;os</td></tr>
+            <tr><td>Segmentos Meta</td><td>Parents with toddlers (3-5), Parents with early school age (6-8), Parents with preteens (9-12)</td></tr>
+            <tr><td>Idioma</td><td>Ingl&eacute;s + Espa&ntilde;ol</td></tr>
+          </table>
+        </div>
+
+        <div class="card" style="margin-bottom:14px;">
+          <div class="card-label">Intereses (Detailed Targeting)</div>
+          <p class="small-text" style="line-height:2;">
+            <span class="pill" style="font-size:11px;">Soccer</span>
+            <span class="pill" style="font-size:11px;">Youth sports</span>
+            <span class="pill" style="font-size:11px;">Kids activities</span>
+            <span class="pill" style="font-size:11px;">Recreation</span>
+            <span class="pill" style="font-size:11px;">Local sports leagues</span>
+            <span class="pill" style="font-size:11px;">Extracurricular</span>
+            <span class="pill" style="font-size:11px;">Parenting</span>
+            <span class="pill" style="font-size:11px;">MLS / Liga MX</span>
+          </p>
+        </div>
+      </div>
+
+      <div>
+        <div class="card card-gold" style="margin-bottom:14px;">
+          <div class="card-label">Geo-Targeting</div>
+          <table class="info-table">
+            <tr><td>Radio</td><td>10 &ndash; 15 millas de la academia</td></tr>
+            <tr><td>Income</td><td>Filtro de zip codes por household income (top 50%)</td></tr>
+            <tr><td>Tipo</td><td>People living in this location</td></tr>
+          </table>
+          <div class="placeholder-box">
+            &#9888; Insertar direcci&oacute;n exacta de la academia aqu&iacute; para definir el radio y los zip codes de income targeting.
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-label">Parent Persona</div>
+          <h3>&ldquo;El padre que busca m&aacute;s que un deporte&rdquo;</h3>
+          <p class="small-text">Quiere que su hijo aprenda disciplina, haga amigos y se mantenga activo. Busca academias cerca de casa con horarios flexibles y ambiente seguro. Responde bien a: clases de prueba gratis, testimonios de otros padres, fotos/videos de ni&ntilde;os en acci&oacute;n.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="slide-footer">
+    <svg width="18" height="18" viewBox="0 0 64 64" fill="none"><rect x="2" y="2" width="60" height="60" rx="16" stroke="#64748b" stroke-width="2" fill="none"/><text x="32" y="42" text-anchor="middle" fill="#64748b" font-family="Inter" font-size="26" font-weight="900">DM</text></svg>
+    Daniel Mu&ntilde;oz &nbsp;&middot;&nbsp; Digital Strategy
+  </div>
+</div>
+
+<!-- ▸ SLIDE 3 — PRESUPUESTO -->
+<div class="slide" id="slide-budget">
+  <div class="slide-inner">
+    <span class="slide-tag tag-green">Presupuesto</span>
+    <h2>Distribuci&oacute;n de $400 USD</h2>
+    <p class="subtitle">Tres niveles de inversi&oacute;n alineados al embudo de conversi&oacute;n. El 75% se concentra en generaci&oacute;n de leads.</p>
+
+    <!-- Budget Bar -->
+    <div class="budget-bar" id="budget-bar">
+      <div class="budget-seg seg-reach" style="width:0%;">$25</div>
+      <div class="budget-seg seg-leads" style="width:0%;">$300</div>
+      <div class="budget-seg seg-remarket" style="width:0%;">$75</div>
+    </div>
+
+    <div class="grid grid-3">
+      <div class="card card-blue">
+        <div class="card-icon icon-blue">R</div>
+        <div class="card-label">Reach / Awareness</div>
+        <div class="stat-num stat-blue">$25</div>
+        <p class="small-text" style="margin-top:6px;">6.25% del presupuesto &nbsp;&middot;&nbsp; ~$0.83/d&iacute;a</p>
+        <p class="small-text" style="margin-top:8px;">Awareness local cerca de la academia. Ampliar reconocimiento de marca entre padres del &aacute;rea.</p>
+      </div>
+      <div class="card card-highlight">
+        <div class="card-icon icon-green">L</div>
+        <div class="card-label">Lead Generation &#11088;</div>
+        <div class="stat-num stat-green">$300</div>
+        <p class="small-text" style="margin-top:6px;">75% del presupuesto &nbsp;&middot;&nbsp; ~$10/d&iacute;a</p>
+        <p class="small-text" style="margin-top:8px;">Meta Lead Ads (formularios instant&aacute;neos) + Click-to-WhatsApp. Coraz&oacute;n de la campa&ntilde;a.</p>
+      </div>
+      <div class="card card-gold">
+        <div class="card-icon icon-gold">RM</div>
+        <div class="card-label">Remarketing</div>
+        <div class="stat-num stat-gold">$75</div>
+        <p class="small-text" style="margin-top:6px;">18.75% del presupuesto &nbsp;&middot;&nbsp; ~$2.50/d&iacute;a</p>
+        <p class="small-text" style="margin-top:8px;">Retarget usuarios que interactuaron pero no convirtieron. Testimonios + urgency.</p>
+      </div>
+    </div>
+  </div>
+  <div class="slide-footer">
+    <svg width="18" height="18" viewBox="0 0 64 64" fill="none"><rect x="2" y="2" width="60" height="60" rx="16" stroke="#64748b" stroke-width="2" fill="none"/><text x="32" y="42" text-anchor="middle" fill="#64748b" font-family="Inter" font-size="26" font-weight="900">DM</text></svg>
+    Daniel Mu&ntilde;oz &nbsp;&middot;&nbsp; Digital Strategy
+  </div>
+</div>
+
+<!-- ▸ SLIDE 4 — ESTRUCTURA DE CAMPAÑAS -->
+<div class="slide">
+  <div class="slide-inner">
+    <span class="slide-tag tag-meta">Estructura</span>
+    <h2>3 Campa&ntilde;as en Meta Ads</h2>
+    <p class="subtitle">Cada campa&ntilde;a tiene un objetivo, audiencia y formato espec&iacute;fico dentro de Meta Ads Manager.</p>
+
+    <div class="grid grid-3">
+      <!-- Campaign 1 -->
+      <div class="card card-blue">
+        <div class="camp-badge camp-1">Campa&ntilde;a 1</div>
+        <h3>Reach / Awareness</h3>
+        <table class="info-table">
+          <tr><td>Objetivo</td><td>Brand Awareness / Reach</td></tr>
+          <tr><td>Budget</td><td>$25/mes (~$0.83/d&iacute;a)</td></tr>
+          <tr><td>Formato</td><td>Video 15s + Image Carousel</td></tr>
+          <tr><td>Audiencia</td><td>Broad &mdash; padres en radio de la academia</td></tr>
+          <tr><td>Ubicaci&oacute;n</td><td>Feed + Stories + Reels</td></tr>
+          <tr><td>Meta</td><td>Reconocimiento local de marca</td></tr>
+        </table>
+      </div>
+
+      <!-- Campaign 2 (Highlighted) -->
+      <div class="card card-highlight">
+        <div class="camp-badge camp-2">Campa&ntilde;a 2 &mdash; Principal</div>
+        <h3>Lead Generation</h3>
+        <table class="info-table">
+          <tr><td>Objetivo</td><td>Lead Generation</td></tr>
+          <tr><td>Budget</td><td>$300/mes (~$10/d&iacute;a)</td></tr>
+          <tr><td>Formato</td><td>Lead Ad (Instant Form) + Click-to-WhatsApp</td></tr>
+          <tr><td>Audiencia</td><td>Padres 25-50, hijos 3-13, intereses deportivos, income filter</td></tr>
+          <tr><td>Ubicaci&oacute;n</td><td>Feed + Stories + Reels + Messenger</td></tr>
+          <tr><td>Campos</td><td>Nombre, Tel&eacute;fono, Edad del hijo, &iquest;C&oacute;mo nos encontraste?</td></tr>
+          <tr><td>CTA</td><td>&ldquo;Inscribe a tu hijo hoy&rdquo; / &ldquo;Agenda clase de prueba&rdquo;</td></tr>
+        </table>
+      </div>
+
+      <!-- Campaign 3 -->
+      <div class="card card-gold">
+        <div class="camp-badge camp-3">Campa&ntilde;a 3</div>
+        <h3>Remarketing</h3>
+        <table class="info-table">
+          <tr><td>Objetivo</td><td>Conversions (Lead Form)</td></tr>
+          <tr><td>Budget</td><td>$75/mes (~$2.50/d&iacute;a)</td></tr>
+          <tr><td>Audiencia</td><td>Page engagers, Video viewers 50%+, Form openers sin submit</td></tr>
+          <tr><td>Formato</td><td>Carousel testimonios + urgency CTA</td></tr>
+          <tr><td>Ubicaci&oacute;n</td><td>Feed + Stories + Audience Network</td></tr>
+          <tr><td>Ventana</td><td>&Uacute;ltimos 14 d&iacute;as de interacci&oacute;n</td></tr>
+        </table>
+      </div>
+    </div>
+  </div>
+  <div class="slide-footer">
+    <svg width="18" height="18" viewBox="0 0 64 64" fill="none"><rect x="2" y="2" width="60" height="60" rx="16" stroke="#64748b" stroke-width="2" fill="none"/><text x="32" y="42" text-anchor="middle" fill="#64748b" font-family="Inter" font-size="26" font-weight="900">DM</text></svg>
+    Daniel Mu&ntilde;oz &nbsp;&middot;&nbsp; Digital Strategy
+  </div>
+</div>
+
+<!-- ▸ SLIDE 5 — FORMATOS CREATIVOS -->
+<div class="slide">
+  <div class="slide-inner">
+    <span class="slide-tag tag-gold">Creativos</span>
+    <h2>Formatos y Direcci&oacute;n Creativa</h2>
+    <p class="subtitle">Recomendaciones de contenido para cada etapa del embudo. El contenido aut&eacute;ntico siempre supera al genérico.</p>
+
+    <div class="two-cols">
+      <div>
+        <div class="card" style="margin-bottom:14px;">
+          <div class="card-icon icon-green">&#9654;</div>
+          <h3>Video 15&ndash;30s</h3>
+          <p class="small-text">Ni&ntilde;os jugando f&uacute;tbol, padres observando, ambiente de academia. CTA claro al final. Formato vertical <strong>9:16</strong> para Stories/Reels. Incluir subt&iacute;tulos (85% ve sin sonido).</p>
+        </div>
+        <div class="card" style="margin-bottom:14px;">
+          <div class="card-icon icon-gold">&#9638;</div>
+          <h3>Carousel (3&ndash;5 im&aacute;genes)</h3>
+          <ul class="checklist">
+            <li>Slide 1: T&iacute;tulo + gancho visual</li>
+            <li>Slide 2-3: Fotos de entrenamientos por grupo de edad</li>
+            <li>Slide 4: Testimonial de un padre</li>
+            <li>Slide 5: CTA + &ldquo;Clase de prueba GRATIS&rdquo;</li>
+          </ul>
+        </div>
+        <div class="card">
+          <div class="card-icon icon-meta">&#9998;</div>
+          <h3>Lead Form (Instant)</h3>
+          <ul class="checklist">
+            <li><strong>Nombre completo</strong> del padre</li>
+            <li><strong>Tel&eacute;fono / WhatsApp</strong></li>
+            <li><strong>Edad del hijo</strong> (dropdown: 3-5, 6-8, 9-13)</li>
+            <li><strong>&iquest;C&oacute;mo nos encontraste?</strong> (opcional)</li>
+          </ul>
+          <p class="small-text" style="margin-top:10px;">Thank-you screen con link directo a WhatsApp para agendar clase de prueba.</p>
+        </div>
+      </div>
+
+      <div>
+        <div class="card card-green" style="margin-bottom:14px;">
+          <div class="card-label">&Aacute;ngulos de Copy</div>
+          <ul class="checklist">
+            <li>&ldquo;Dale a tu hijo la disciplina y diversi&oacute;n del f&uacute;tbol&rdquo;</li>
+            <li>&ldquo;Clases para ni&ntilde;os de 3 a 13 a&ntilde;os. Clase de prueba GRATIS&rdquo;</li>
+            <li>&ldquo;M&aacute;s que f&uacute;tbol: confianza, amigos y disciplina&rdquo;</li>
+            <li>&ldquo;Tu hijo merece el mejor entrenamiento. Inscr&iacute;belo hoy&rdquo;</li>
+            <li>&ldquo;&Uacute;ltimos cupos disponibles &mdash; reserva ahora&rdquo; (remarketing)</li>
+          </ul>
+        </div>
+        <div class="card card-gold">
+          <div class="card-label">Best Practices</div>
+          <ul class="checklist">
+            <li>Usar fotos/videos <strong>reales</strong> de la academia (no stock)</li>
+            <li>Mostrar <strong>padres felices</strong> observando a sus hijos</li>
+            <li>Texto en <strong>espa&ntilde;ol e ingl&eacute;s</strong> si el mercado es biling&uuml;e</li>
+            <li>Siempre incluir <strong>precio o &ldquo;GRATIS&rdquo;</strong> para filtrar calidad</li>
+            <li>Video con <strong>subt&iacute;tulos</strong> &mdash; 85% consume sin sonido</li>
+            <li>CTA visible en los <strong>primeros 3 segundos</strong></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="slide-footer">
+    <svg width="18" height="18" viewBox="0 0 64 64" fill="none"><rect x="2" y="2" width="60" height="60" rx="16" stroke="#64748b" stroke-width="2" fill="none"/><text x="32" y="42" text-anchor="middle" fill="#64748b" font-family="Inter" font-size="26" font-weight="900">DM</text></svg>
+    Daniel Mu&ntilde;oz &nbsp;&middot;&nbsp; Digital Strategy
+  </div>
+</div>
+
+<!-- ▸ SLIDE 6 — TIMELINE -->
+<div class="slide">
+  <div class="slide-inner">
+    <span class="slide-tag tag-blue">Calendario</span>
+    <h2>Plan de 4 Semanas</h2>
+    <p class="subtitle">Fases de lanzamiento, optimizaci&oacute;n, escala y cierre. Cada semana tiene objetivos espec&iacute;ficos.</p>
+
+    <div class="grid grid-4">
+      <div class="card week-card week-1">
+        <div class="week-num">Semana 1</div>
+        <h3>Lanzamiento + Testing</h3>
+        <ul class="checklist">
+          <li>Lanzar las 3 campa&ntilde;as</li>
+          <li>2&ndash;3 variantes de creativo por campa&ntilde;a</li>
+          <li>Monitoreo diario de CPL y CTR</li>
+          <li>A/B test: Lead Form vs Click-to-WhatsApp</li>
+          <li>Verificar tracking y calidad de leads</li>
+        </ul>
+      </div>
+      <div class="card week-card week-2">
+        <div class="week-num">Semana 2</div>
+        <h3>Optimizaci&oacute;n</h3>
+        <ul class="checklist">
+          <li>Pausar creativos con CTR &lt; 1%</li>
+          <li>Redistribuir budget al mejor performer</li>
+          <li>Activar remarketing con data acumulada</li>
+          <li>Revisar calidad de leads recibidos</li>
+          <li>Ajustar horarios de publicaci&oacute;n</li>
+        </ul>
+      </div>
+      <div class="card week-card week-3">
+        <div class="week-num">Semana 3</div>
+        <h3>Escala</h3>
+        <ul class="checklist">
+          <li>Duplicar mejor ad set con +20% budget</li>
+          <li>Expandir lookalike si hay 100+ leads</li>
+          <li>Probar nuevos &aacute;ngulos de copy</li>
+          <li>Agregar testimonials a creativos</li>
+          <li>Evaluar CPA vs objetivo</li>
+        </ul>
+      </div>
+      <div class="card week-card week-4">
+        <div class="week-num">Semana 4</div>
+        <h3>Push Final</h3>
+        <ul class="checklist">
+          <li>Urgency copy: &ldquo;&Uacute;ltimos cupos&rdquo;</li>
+          <li>Remarketing agresivo a todos los engaged</li>
+          <li>Consolidar todos los leads</li>
+          <li>Reporte final de resultados</li>
+          <li>Recomendaciones para mes 2</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="slide-footer">
+    <svg width="18" height="18" viewBox="0 0 64 64" fill="none"><rect x="2" y="2" width="60" height="60" rx="16" stroke="#64748b" stroke-width="2" fill="none"/><text x="32" y="42" text-anchor="middle" fill="#64748b" font-family="Inter" font-size="26" font-weight="900">DM</text></svg>
+    Daniel Mu&ntilde;oz &nbsp;&middot;&nbsp; Digital Strategy
+  </div>
+</div>
+
+<!-- ▸ SLIDE 7 — KPIs ESTIMADOS -->
+<div class="slide" id="slide-kpis">
+  <div class="slide-inner">
+    <span class="slide-tag tag-green">KPIs Estimados</span>
+    <h2>M&eacute;tricas Esperadas</h2>
+    <p class="subtitle">Basadas en benchmarks de Meta Ads para educaci&oacute;n y deportes infantiles en US (2025&ndash;2026). Resultados reales var&iacute;an seg&uacute;n creativos y audiencia local.</p>
+
+    <div class="grid grid-3">
+      <div class="card">
+        <div class="kpi-label">Reach Estimado</div>
+        <div class="kpi-num stat-blue"><span class="counter" data-target="8000">0</span> &ndash; <span class="counter" data-target="15000">0</span></div>
+        <div class="kpi-range">personas &uacute;nicas alcanzadas</div>
+      </div>
+      <div class="card">
+        <div class="kpi-label">Impresiones</div>
+        <div class="kpi-num stat-blue"><span class="counter" data-target="25000">0</span> &ndash; <span class="counter" data-target="40000">0</span></div>
+        <div class="kpi-range">total across all campaigns</div>
+      </div>
+      <div class="card">
+        <div class="kpi-label">Clicks</div>
+        <div class="kpi-num stat-green"><span class="counter" data-target="400">0</span> &ndash; <span class="counter" data-target="800">0</span></div>
+        <div class="kpi-range">CTR promedio 1&ndash;2%</div>
+      </div>
+    </div>
+
+    <div class="grid grid-3" style="margin-top:16px;">
+      <div class="card card-highlight">
+        <div class="kpi-label">Leads Estimados</div>
+        <div class="kpi-num stat-green"><span class="counter" data-target="30">0</span> &ndash; <span class="counter" data-target="60">0</span></div>
+        <div class="kpi-range">padres interesados en la academia</div>
+      </div>
+      <div class="card card-green">
+        <div class="kpi-label">CPL (Cost per Lead)</div>
+        <div class="kpi-num stat-gold">$<span class="counter" data-target="5">0</span> &ndash; $<span class="counter" data-target="10">0</span></div>
+        <div class="kpi-range">benchmark industria educaci&oacute;n US</div>
+      </div>
+      <div class="card">
+        <div class="kpi-label">CPC Promedio</div>
+        <div class="kpi-num stat-gold">$0.<span class="counter" data-target="50">0</span> &ndash; $1.<span class="counter" data-target="0" data-suffix="00">0</span></div>
+        <div class="kpi-range">costo por click al formulario</div>
+      </div>
+    </div>
+
+    <div class="card" style="margin-top:16px; text-align:center;">
+      <p class="small-text">&#9432; Estas estimaciones son basadas en promedios de la industria. Los resultados reales depender&aacute;n de la calidad de los creativos, la audiencia local, y la competencia en la zona geogr&aacute;fica.</p>
+    </div>
+  </div>
+  <div class="slide-footer">
+    <svg width="18" height="18" viewBox="0 0 64 64" fill="none"><rect x="2" y="2" width="60" height="60" rx="16" stroke="#64748b" stroke-width="2" fill="none"/><text x="32" y="42" text-anchor="middle" fill="#64748b" font-family="Inter" font-size="26" font-weight="900">DM</text></svg>
+    Daniel Mu&ntilde;oz &nbsp;&middot;&nbsp; Digital Strategy
+  </div>
+</div>
+
+<!-- ▸ SLIDE 8 — PRÓXIMOS PASOS -->
+<div class="slide">
+  <div class="slide-inner">
+    <span class="slide-tag tag-gold">Siguientes Pasos</span>
+    <h2>Antes de Lanzar</h2>
+    <p class="subtitle">Action items necesarios para arrancar la campa&ntilde;a. Una vez completados, podemos estar live en 24&ndash;48 horas.</p>
+
+    <div class="steps-grid">
+      <div class="card step-card">
+        <div class="step-num">1</div>
+        <div class="step-text"><strong>Confirmar ubicaci&oacute;n</strong><br>Direcci&oacute;n exacta de la academia para definir el radio de geo-targeting</div>
+      </div>
+      <div class="card step-card">
+        <div class="step-num">2</div>
+        <div class="step-text"><strong>Zip codes de income</strong><br>Definir los zip codes target filtrados por nivel de ingreso del &aacute;rea</div>
+      </div>
+      <div class="card step-card">
+        <div class="step-num">3</div>
+        <div class="step-text"><strong>Contenido creativo</strong><br>Entregar 2&ndash;3 videos + 5&ndash;10 fotos de alta calidad de la academia en acci&oacute;n</div>
+      </div>
+      <div class="card step-card">
+        <div class="step-num">4</div>
+        <div class="step-text"><strong>Acceso a redes</strong><br>Admin de la p&aacute;gina de Facebook e Instagram del club</div>
+      </div>
+      <div class="card step-card">
+        <div class="step-num">5</div>
+        <div class="step-text"><strong>WhatsApp Business</strong><br>N&uacute;mero de WhatsApp Business verificado para los anuncios Click-to-WhatsApp</div>
+      </div>
+      <div class="card step-card">
+        <div class="step-num">6</div>
+        <div class="step-text"><strong>Formulario de leads</strong><br>Aprobar los campos y preguntas del formulario instant&aacute;neo</div>
+      </div>
+      <div class="card step-card" style="grid-column: span 2;">
+        <div class="step-num" style="background: var(--secondary-dim); color: var(--secondary-light); border-color: rgba(245,158,11,0.2);">7</div>
+        <div class="step-text"><strong>Aprobaci&oacute;n final</strong><br>Confirmar presupuesto de $400 USD y fecha de inicio de la campa&ntilde;a. Una vez aprobado, estamos en el aire en 24&ndash;48 horas.</div>
+      </div>
+    </div>
+
+    <div class="contact-card">
+      <svg width="48" height="48" viewBox="0 0 64 64" fill="none" style="margin-bottom:12px;">
+        <defs><linearGradient id="dmGrad2" x1="0" y1="0" x2="64" y2="64"><stop offset="0%" stop-color="#4ade80"/><stop offset="100%" stop-color="#f59e0b"/></linearGradient></defs>
+        <rect x="2" y="2" width="60" height="60" rx="16" stroke="url(#dmGrad2)" stroke-width="2.5" fill="none"/>
+        <text x="32" y="42" text-anchor="middle" fill="url(#dmGrad2)" font-family="Inter, sans-serif" font-size="26" font-weight="900" letter-spacing="-1">DM</text>
+      </svg>
+      <h3 class="gradient-text" style="font-size:22px;">Daniel Mu&ntilde;oz</h3>
+      <p style="font-size:13px; color: var(--text-secondary); margin-top:4px;">Digital Strategy &nbsp;&middot;&nbsp; Media Planning &nbsp;&middot;&nbsp; Performance Marketing</p>
+      <p style="font-size:12px; color: var(--text-muted); margin-top:12px;">Abril 2026</p>
+    </div>
+  </div>
+</div>
+
+</div><!-- /slides-wrapper -->
+
+<!-- ═══════════════════════════════════════════
+     JAVASCRIPT
+     ═══════════════════════════════════════════ -->
+<script>
+(function() {
+  var wrapper = document.getElementById('slides-wrapper');
+  var slides = document.querySelectorAll('.slide');
+  var total = slides.length;
+  var current = 0;
+
+  var progressBar = document.getElementById('progress-bar');
+  var counter = document.getElementById('slide-counter');
+  var prevBtn = document.getElementById('prev-btn');
+  var nextBtn = document.getElementById('next-btn');
+  var dotsContainer = document.getElementById('slide-dots');
+  var kbHint = document.getElementById('kb-hint');
+
+  // Build dots
+  for (var i = 0; i < total; i++) {
+    var dot = document.createElement('div');
+    dot.className = 'dot' + (i === 0 ? ' active' : '');
+    dot.setAttribute('data-index', i);
+    dot.addEventListener('click', function() { goTo(parseInt(this.getAttribute('data-index'))); });
+    dotsContainer.appendChild(dot);
+  }
+  var dots = dotsContainer.querySelectorAll('.dot');
+
+  function goTo(index) {
+    if (index < 0 || index >= total) return;
+    slides[current].classList.remove('active');
+    dots[current].classList.remove('active');
+    current = index;
+    slides[current].classList.add('active');
+    dots[current].classList.add('active');
+    wrapper.style.transform = 'translateX(-' + (current * 100) + 'vw)';
+    progressBar.style.width = ((current + 1) / total * 100) + '%';
+    counter.textContent = String(current + 1).padStart(2, '0') + ' / ' + String(total).padStart(2, '0');
+    prevBtn.style.opacity = current === 0 ? '0.15' : '0.5';
+    nextBtn.style.opacity = current === total - 1 ? '0.15' : '0.5';
+
+    // Trigger budget bar animation
+    var budgetBar = document.getElementById('budget-bar');
+    if (slides[current].id === 'slide-budget') {
+      budgetBar.classList.add('animate');
+    }
+
+    // Trigger KPI counters
+    if (slides[current].id === 'slide-kpis') {
+      animateCounters();
+    }
+  }
+
+  // Navigation
+  prevBtn.addEventListener('click', function() { goTo(current - 1); });
+  nextBtn.addEventListener('click', function() { goTo(current + 1); });
+
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'ArrowRight' || e.key === 'ArrowDown') { e.preventDefault(); goTo(current + 1); }
+    if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') { e.preventDefault(); goTo(current - 1); }
+    if (e.key === 'f' || e.key === 'F') { toggleFS(); }
+    if (kbHint.style.opacity !== '0') { kbHint.style.opacity = '0'; }
+  });
+
+  // Auto-hide hint
+  setTimeout(function() { kbHint.style.opacity = '0'; }, 6000);
+
+  // Touch swipe
+  var touchStartX = 0;
+  document.addEventListener('touchstart', function(e) { touchStartX = e.touches[0].clientX; });
+  document.addEventListener('touchend', function(e) {
+    var diff = touchStartX - e.changedTouches[0].clientX;
+    if (Math.abs(diff) > 50) { diff > 0 ? goTo(current + 1) : goTo(current - 1); }
+  });
+
+  goTo(0);
+
+  // ── KPI Counter Animation ──
+  var countersAnimated = false;
+  function animateCounters() {
+    if (countersAnimated) return;
+    countersAnimated = true;
+    var counters = document.querySelectorAll('#slide-kpis .counter');
+    counters.forEach(function(el) {
+      var target = parseInt(el.getAttribute('data-target'));
+      if (target === 0) { el.textContent = '00'; return; }
+      var duration = 1500;
+      var start = performance.now();
+      function update(now) {
+        var elapsed = now - start;
+        var progress = Math.min(elapsed / duration, 1);
+        // Ease out cubic
+        var ease = 1 - Math.pow(1 - progress, 3);
+        var value = Math.round(ease * target);
+        el.textContent = value.toLocaleString('en-US');
+        if (progress < 1) requestAnimationFrame(update);
+      }
+      requestAnimationFrame(update);
+    });
+  }
+})();
+
+function toggleFS() {
+  if (!document.fullscreenElement) {
+    document.documentElement.requestFullscreen().catch(function(){});
+  } else {
+    document.exitFullscreen().catch(function(){});
+  }
+}
+</script>
+</body>
+</html>
